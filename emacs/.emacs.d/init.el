@@ -9,8 +9,7 @@
 (package-initialize)
 
 
-;; https://github.com/jorgenschaefer/elpy
-;; Para elpy hace falta instalar con pip:
+;; To work with elpy install some python packages:
 ;; # Either of these
 ;; pip install rope
 ;; pip install jedi
@@ -22,8 +21,20 @@
 ;; pip install autopep8
 ;; # and yapf for code formatting
 ;; pip install yapf
-(setq package-list '(recentf expand-region iy-go-to-char key-chord yasnippet projectile
-			     nose elpy haskell-mode yaml-mode magit))
+;; 
+;; https://github.com/jorgenschaefer/elpy
+(setq package-list
+      '(recentf  ; list of recently open files
+	expand-region  ; increase selected region by semantic units 
+	iy-go-to-char  ; mimics "f" vim command 
+	key-chord  ; bind commands to combinations of key-strokes
+	magit  ; git integration
+	projectile  ; https://github.com/bbatsov/projectile
+	elpy  ; python IDE
+	nose  ; nose test integration for python and co
+	haskell-mode
+	yaml-mode
+	yasnippet))
 
 ; fetch the list of packages available 
 (unless (and (mapcar 'package-installed-p package-list))
