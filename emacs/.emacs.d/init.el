@@ -1,5 +1,13 @@
-;; MELPA y Marmalade repos
 (require 'package)
+
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives 
+	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+(package-initialize)
+
 
 ;; https://github.com/jorgenschaefer/elpy
 ;; Para elpy hace falta instalar con pip:
@@ -15,18 +23,10 @@
 ;; # and yapf for code formatting
 ;; pip install yapf
 (setq package-list '(recentf expand-region iy-go-to-char key-chord yasnippet projectile
-			     nose elpy haskell-mode yaml-mode))
-
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives 
-	     '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
-(package-initialize)
+			     nose elpy haskell-mode yaml-mode magit))
 
 ; fetch the list of packages available 
-(unless package-archive-contents
+(unless (and (mapcar 'package-installed-p package-list))
   (package-refresh-contents))
 
 ; install the missing packages
