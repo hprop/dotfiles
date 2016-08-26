@@ -26,7 +26,7 @@
 (setq package-list
       '(recentf  ; list of recently open files
 	expand-region  ; increase selected region by semantic units 
-	iy-go-to-char  ; mimics "f" vim command 
+	iy-go-to-char  ; mimics "f" vim command
 	key-chord  ; bind commands to combinations of key-strokes
 	magit  ; git integration
 	projectile  ; https://github.com/bbatsov/projectile
@@ -36,14 +36,12 @@
 	yaml-mode
 	yasnippet))
 
-; fetch the list of packages available 
-(unless (and (mapcar 'package-installed-p package-list))
-  (package-refresh-contents))
-
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+;; install missing packages
+(require 'cl-lib)
+(let ((not-installed (cl-remove-if 'package-installed-p package-list)))
+  (when not-installed
+    (package-refresh-contents)
+    (mapc 'package-install not-installed)))
 
 ;; no startup msg  
 (setq inhibit-startup-message t)
