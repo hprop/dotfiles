@@ -152,11 +152,15 @@
 
 ;; Apariencia
 (load-theme 'misterioso t)
-(set-frame-font "Droid Sans Mono-11" nil t)
 (tool-bar-mode -1)
 (setq column-number-mode t) ; posición row/col del cursor
-(set-cursor-color "#f58ce0") 
-
+(set-cursor-color "#f58ce0")
+(cond
+ ((string-equal system-type "gnu/linux")
+  (setq my-custom-font "Droid Sans Mono-11"))
+ ((string-equal system-type "windows-nt")
+  (setq my-custom-font "Lucida Console-11")))
+(set-frame-font my-custom-font nil t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
