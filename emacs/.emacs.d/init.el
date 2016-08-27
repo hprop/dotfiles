@@ -48,6 +48,10 @@
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'repeat)
 
+(global-set-key (kbd "<f5>") 'revert-buffer)
+(append '(".+\.log" ".+\.ini")  revert-without-query)
+
+
 ;; IDO mode
 (require 'ido)
 (ido-mode t)
@@ -78,7 +82,8 @@
 
 ;; Expand region
 (require 'expand-region)
-(global-set-key (kbd "<C-return>") 'er/expand-region)
+(global-set-key (kbd "M-ñ") 'er/expand-region)
+(global-set-key (kbd "M-Ñ") 'er/contract-region)
 
 ;; Ace-jump mode
 (define-key global-map (kbd "C-ñ") 'ace-jump-mode)
