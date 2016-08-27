@@ -43,12 +43,15 @@
     (package-refresh-contents)
     (mapc 'package-install not-installed)))
 
-;; no startup msg  
-(setq inhibit-startup-message t)
 
 ;; Básicos
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'repeat)
+
+;; IDO mode
+(require 'ido)
+(ido-mode t)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Abrir ficheros recientes
 (require 'recentf)
@@ -62,13 +65,16 @@
     (message "Aborting")))
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
-
 ;; Navegar entre buffers
 (global-set-key (kbd "C-s-j") 'other-window)
 (defun other-window-back ()
   (interactive)
   (other-window -1))
 (global-set-key (kbd "C-s-k") 'other-window-back)
+
+;; Key chords
+(require 'key-chord)
+(key-chord-mode 1)
 
 ;; Expand region
 (require 'expand-region)
@@ -83,18 +89,15 @@
 (setq iy-go-to-char-key-backward ?\;)
 (global-set-key (kbd "C-c f") 'iy-go-up-to-char)
 (global-set-key (kbd "C-c F") 'iy-go-up-to-char-backward)
-
-;; Key chords
-(require 'key-chord)
-(key-chord-mode 1)
 (key-chord-define-global "DF" 'iy-go-up-to-char)
 (key-chord-define-global "SD" 'iy-go-up-to-char-backward)
 
 
-;; IDO mode
-(require 'ido)
-(ido-mode t)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+;; Projectile setup
+(projectile-global-mode)
+
+;; Magit setup
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Python mode
 (setq python-shell-interpreter "python2")
@@ -132,7 +135,7 @@
 (define-key gud-minor-mode-map (kbd "<f2>") 'gud-print)
 
 
-;; pdb setup
+;; pdb setup (necessary??)
 (setq pdb-path '/usr/lib/python2.7/pdb.py
       gud-pdb-command-name (symbol-name pdb-path))
 (defadvice pdb (before gud-query-cmdline activate)
@@ -151,6 +154,7 @@
                 (font-lock-mode 1))))
 
 ;; Apariencia
+(setq inhibit-startup-message t)
 (load-theme 'misterioso t)
 (tool-bar-mode -1)
 (setq column-number-mode t) ; posición row/col del cursor
