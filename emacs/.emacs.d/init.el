@@ -47,6 +47,7 @@
 ;; Básicos
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-,") 'repeat)
+(global-set-key (kbd "M-H") (lambda () (interactive) (set-mark-command 1)))
 
 (global-set-key (kbd "<f5>") 'revert-buffer)
 (append '(".+\.log" ".+\.ini")  revert-without-query)
