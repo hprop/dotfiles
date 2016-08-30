@@ -165,11 +165,19 @@
 (tool-bar-mode -1)
 (setq column-number-mode t) ; posición row/col del cursor
 (set-cursor-color "#f58ce0")
+
+;; System-specific setup
 (cond
  ((string-equal system-type "gnu/linux")
   (setq my-custom-font "Droid Sans Mono-11"))
  ((string-equal system-type "windows-nt")
-  (setq my-custom-font "Lucida Console-11")))
+  (progn
+    (setq my-custom-font "Lucida Console-10")
+    (prefer-coding-system 'utf-8)
+    ;; try to improve slow performance on windows.
+    (setq w32-get-true-file-attributes nil)
+    (setq ido-max-dir-file-cache 0))))
+    
 (set-frame-font my-custom-font nil t)
 
 (custom-set-variables
